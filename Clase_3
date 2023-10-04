@@ -1,0 +1,47 @@
+fun main() {
+    val userValidated = login("Juanito", "Navaja")
+    println("Usuario loggeado? $userValidated \n")
+    
+    println("Área con valores por defecto: ${rectangleArea()}")
+    println("Área con valor de base: ${rectangleArea(10.35)}")
+    println("Área con valores de base y altura: ${rectangleArea(15.50, 25.6)}")
+    println("Área con valor de altura: ${rectangleArea(height = 10.35)}")
+    println("Área con valores de base y altura con named parameters : ${rectangleArea(base = 2.0,height = 3.0)} \n")
+    
+    println("\tVolumen\n")
+    println("Área con valores por defecto: ${rectangleVolumen()}")
+    
+    println("\tPromedio\n")
+    println("El promedio es ${calificacionesPromedio(cal3 = 10f)}")
+}
+
+fun login(user:String, password:String ) : Boolean {
+    fun validate(input:String): Boolean {
+        if(input.isEmpty()) {
+            return false
+        }
+        return true
+    }
+    
+    val userValidated = validate(user)
+    val passValidated = validate(password)
+    
+    return userValidated && passValidated
+}
+
+fun rectangleArea(base:Double = 20.0, height:Double = 30.0):Double{
+    return base*height
+}
+
+fun rectangleVolumen(base:Double = 3.0, height:Double = 5.0, long:Double = 7.0):Double{
+    return rectangleArea(base, height)*long
+}
+
+fun calificacionesPromedio(cal1:Float = 8.0f, cal2:Float = 9.0f, cal3:Float) :Float {
+    return (cal1 + cal2 + cal3 ) / 3
+}
+
+/* redondear calificación
+ * menor a .6 no se redondea
+ * de .6 a .9 se redondea
+ *  */
