@@ -1,0 +1,74 @@
+fun main() {
+	val userValidated = login("Juanito", "Navajas")    
+    triangle()
+    /*println("Usuario loggeado? $userValidated")
+    
+    println("\nArea con valores por defecto: ${rectangleArea()} ")
+    println("\nArea con valores por defecto: ${rectangleArea(height = 10.0, base = 7.5)} ")
+    
+    println("\n\nVolumen con valores por defecto: ${rectangleVolumen()} ")
+    
+    println("\n\nPromedio Calificaciones: ${promedioCal(cal3 = 10f)} ")
+    
+    
+    var promedio = fun ceil(promedioCal(cal3 = 10f):Double):Double
+    
+    println("\n\nCalificaciones: $promedio ")*/
+     tipoDeDato("1.0")
+    
+}
+
+fun tipoDeDato(dato: Any) {
+	when (dato) {
+        is String -> println("Es un String")
+        is Int -> println("Es un Int")
+        is Double -> println("Es un Double")
+        else -> println("Es un valor no soportado")
+        
+    }
+}
+
+fun login(user: String, password: String) : Boolean {
+    fun validate(input: String) : Boolean{
+        if (input.isEmpty()) {
+            return false
+        }
+        return true
+    }
+    val userValidated = validate(user)
+    val passValidated = validate(password)
+    
+    return userValidated && passValidated
+}
+
+fun rectangleArea(base:Double = 20.0, height: Double = 30.0) : Double {
+    return base*height
+}
+
+fun rectangleVolumen(base:Double = 20.0, height: Double = 30.0, long: Double = 2.0) : Double {
+    return rectangleArea(base, height) * long
+}
+
+fun promedioCal(cal1: Float = 8f, cal2: Float = 8f, cal3: Float): Float{
+    return (cal1 + cal2 + cal3)/3
+}
+
+fun triangle(){
+   
+    val lado1 = 3
+    val lado2 = 3
+    val lado3 = 1
+    
+    if(lado1 != lado2 && lado3 != lado1 && lado2 != lado3) {
+        println("Es escaleno")
+    } else if (lado1 != lado2 || lado2 != lado3 || lado3 != lado1) {
+        println("Es isoceles")
+    } else {
+        println("Es equilatero")
+    }
+}
+
+/*
+fun imprimir()
+	valor: String = "Este es el primer valor por defecto",
+	valor2: String = "Este es el segundo valor"*/
