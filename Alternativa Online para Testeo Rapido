@@ -1,0 +1,8 @@
+fun main() {
+    
+    println("Hola UPIICSA")
+    println("Hola IPN")
+    
+    print("Hola UPIICSA")
+    print("Hola IPN")
+}
