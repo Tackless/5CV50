@@ -1,0 +1,66 @@
+fun main() {
+    val suma = {a:Int, b:Int -> a+b}
+    //println(suma(5,6))
+    
+    //Expresión Lambda
+    val saverGrade: (Double, Double) -> String = { expected:Double, saved:Double -> 
+    	val percentage = saved / expected 
+    
+    	when {
+            percentage > 1 -> "Pro Saver"
+            percentage == 1.0 -> "Good Saver"
+            percentage < 1.0 && percentage >= 0.8 -> "Almost"
+            else -> "Trainee Saver"
+        }
+    }
+    
+    //Funciones Anonimas
+    val saverGrade2 = fun(expected:Double, saved:Double): String {
+        val percentage = saved / expected 
+    
+    	return when {
+            percentage > 1 -> "Pro Saver"
+            percentage == 1.0 -> "Good Saver"
+            percentage < 1.0 && percentage >= 0.8 -> "Almost"
+            else -> "Trainee Saver"
+        }
+    }
+    
+    //println(saverGrade(100.0, 70.0))
+    //println(saverGrade2(100.0, 70.0))
+	
+       
+    fun calculator(a:Int, b:Int, operacion: (Int,Int) -> Int) :Int {
+        return operacion(a,b)
+    }
+    
+    fun suma(a:Int, b:Int) = a+b
+    fun resta(a:Int, b:Int) = a-b
+    fun multiplicar(a:Int, b:Int) = a*b
+    fun dividir(a:Int, b:Int) = a/b
+    
+    //println(calculator(5,4, ::suma))
+    //println(calculator(5,4, ::resta))
+    //println(calculator(5,4, ::multiplicar))
+    //println(calculator(5,4, ::dividir))
+    
+    /*
+     * Terminar
+     * fun proCup (precio:Int, cupon:String) :Int {
+        when cupon {
+            "NOIVA" -> println(precio)
+            "HALFIVA" -> println(precio*1.08)
+            "MINUS100" -> println(precio-100)
+            "PROMO2020" -> 
+        }
+    }
+    
+    fun proCupHighOrder (proCup: )*/
+    
+    fun nonInLined(rumLambda: () -> Unit) {
+        println("Antes de lambda")
+        
+        println("Despues de lambda")
+    }
+    
+}
