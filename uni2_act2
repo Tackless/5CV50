@@ -1,0 +1,107 @@
+fun main() {
+	val viajeMonterrey = National("Monterrey")
+    //viajeMonterrey.quotePrice(2)
+    //viajeMonterrey.reserve(4)
+    
+    val viajeBajaMonterrey = NationalLowSeason("Monterrey")
+    //viajeBajaMonterrey.reserve(4)
+    
+    val scaryMovie = Movie("Scary Movie", "Comedia", 88.27)
+    println(scaryMovie.name)
+    scaryMovie.createdAt = "2000"
+    println("Fecha de estreno: ${scaryMovie.createdAt}")
+    
+    val (name, gender, duration) = scaryMovie
+}
+
+class Vehicle {
+    init {
+        println("vehiculo creado")
+	}
+    
+    companion object Factory {
+    	fun create(): Vehicle = Vehicle()
+    }
+    
+    val vehicleInstance = Vehicle.create()
+}
+
+abstract class Travel {
+
+    abstract val country: String
+    abstract val city: String
+    protected val serviceType = "Viaje"
+    protected var reserved = false
+    protected var paidAmount = 0
+    
+    abstract fun quotePrice(numDays:Int)
+    protected abstract fun getPrice(numDays:Int): Int
+
+    fun reserve(numDays: Int){
+        if(reserved){
+            println("""¡Ya reservaste tu viaje! 
+                       País: $country
+                       Ciudad: $city
+                       Precio: $paidAmount""".trimMargin())
+            return
+        }
+        val amount = getPrice(numDays)
+        if(amount==0){
+            return
+        }
+        reserved = true
+        paidAmount = amount
+        println("¡Viaje reservado exitosamente! \n\tPaís: $country \n\tCiudad: $city \n\tPrecio: $paidAmount".trimMargin())
+    }
+}
+
+open class National(override val city:String): Travel() {
+    override val country = "Mexico"
+    
+    protected val fees = mapOf(
+    	"Monterrey" to 400,
+        "Guadalajara" to 350,
+        "CDMX" to 360
+    )
+    
+    override fun getPrice(numDays: Int): Int {
+        val fee = fees[city]
+        return if (fee==null) 0 else fee*numDays
+    }
+    
+    override fun quotePrice(numDays: Int) {
+        val price = getPrice(numDays)
+        if(price==0){
+            println("Lo sentuimos, no hacemos viajes a esa ciudd")
+        } else {
+            println("Tu viaje a $city cuesta \$$price\n")
+        }
+    }
+}
+
+open class NationalLowSeason(city: String) : National(city), IPromotion {
+    override val discount = 10 
+    override val typeDiscount = 0
+    
+    override fun getPrice(numDays: Int): Int {
+        val amount = super.getPrice(numDays)
+        return if (amount == 0) 0 else getDiscountPrice(amount)
+    }
+}
+
+interface IPromotion {
+    val discount: Int
+    val typeDiscount: Int 
+    
+    fun getDiscountPrice(amount:Int): Int {
+        return if(typeDiscount == 0) {
+            (amount * (100 - discount))/100
+        } else {
+            amount - discount
+        }
+    }
+}
+
+data class Movie(val name: String, val gender: String, val duration: Double){
+    var createdAt = ""
+}
